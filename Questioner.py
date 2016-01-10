@@ -14,14 +14,14 @@ import os
 user=os.getlogin()
 
 #Fine last session version
-fileList=os.listdir("C:/Users/%s/Desktop/VragenHisCrit/saves" %user)
+fileList=os.listdir("C:/Users/%s/Desktop/QuestionHistCrit/saves" %user)
 fileList=sorted(fileList)
 lastFile=fileList[-1]
 numberFile=[int(s) for s in lastFile.split("_") if s.isdigit()]
 numberFile=numberFile[0]
 
 #Open lijst met foute stellingen
-f = codecs.open ('C:/Users/%s/Desktop/VragenHisCrit/vragenlijstFout.txt' %user,'r',"utf-8")
+f = codecs.open ('C:/Users/%s/Desktop/QuestionHistCrit/vragenlijstFout.txt' %user,'r',"utf-8")
 
 #Omzetting in array
 q= pan.DataFrame(columns=['Question','Answer','explanationifFalse','AnswerShort'])
@@ -55,7 +55,7 @@ for x in range(0, 62):
     q=q.append(temp)
   
 #Open lijst met juiste stelling in UTF-8 encoding
-f = codecs.open ('C:/Users/%s/Desktop/VragenHisCrit/vragenlijstJuist.txt' %user,'r',"utf-8")
+f = codecs.open ('C:/Users/%s/Desktop/QuestionHistCrit/vragenlijstJuist.txt' %user,'r',"utf-8")
 
 for x in range(0, 93):
     line1=f.readline()    
@@ -81,7 +81,7 @@ mode=input("Vorige sessie laden? (y/n):  ")
 N=int(input("Hoeveel vragen ?: "))
 
 if mode=="y":
-    q=pan.read_csv("C:/Users/%s/Desktop/VragenHisCrit/saves/session_%d_.csv" %(user,numberFile) ,encoding="utf-8")
+    q=pan.read_csv("C:/Users/%s/Desktop/QuestionHistCrit/saves/session_%d_.csv" %(user,numberFile) ,encoding="utf-8")
     del q["Unnamed: 0"]    
 while(counter<=N):
     randNum=np.random.randint(0,len(q.index))
@@ -116,6 +116,6 @@ print("Je score is %d / %d" % (score,N) )
 
 #Alle foute samenvoegen bij de niet-gevraagde
 numberFile +=1
-q.to_csv("C:/Users/%s/Desktop/VragenHisCrit/saves/session_%d_.csv" %(user,numberFile),encoding="utf-8")
+q.to_csv("C:/Users/%s/Desktop/QuestionHistCrit/saves/session_%d_.csv" %(user,numberFile),encoding="utf-8")
 
 
